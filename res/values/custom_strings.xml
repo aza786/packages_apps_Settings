@@ -76,6 +76,10 @@ Notifications may be delayed for these apps."</string>
     <string name="camera_launch_title">Launch camera</string>
     <string name="camera_launch_summary">A longpress and release will launch camera</string>
 
+    <!-- Fingerprint unlock -->
+    <string name="fp_unlock_keystore_title">Force FP authentication</string>
+    <string name="fp_unlock_keystore_summary">Unlock device with fingerprint after reboot or lockdown</string>
+
     <!-- Key backlight -->
     <string name="button_backlight_title">Backlight</string>
     <string name="button_backlight_enabled">Illuminate buttons</string>

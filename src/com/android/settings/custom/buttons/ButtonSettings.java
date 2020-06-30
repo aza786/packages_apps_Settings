@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.ComponentName;
 import android.content.om.IOverlayManager;
 import android.content.res.Resources;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.RemoteException;
@@ -67,6 +68,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
         Preference.OnPreferenceChangeListener {
     private static final String TAG = "ButtonSettings";
 
+    private static final String FP_UNLOCK_KEYSTORE = "fp_unlock_keystore";
     private static final String KEY_BUTTON_BACKLIGHT = "button_backlight";
     private static final String KEY_HOME_LONG_PRESS = "hardware_keys_home_long_press";
     private static final String KEY_HOME_DOUBLE_TAP = "hardware_keys_home_double_tap";
@@ -107,6 +109,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
     private static final String CATEGORY_POWER = "power_key";
     private static final String CATEGORY_OTHERS = "others_category";
 
+    private FingerprintManager mFingerprintManager;
+    private SwitchPreference mFpKeystore;
     private ListPreference mHomeLongPressAction;
     private ListPreference mHomeDoubleTapAction;
     private ListPreference mMenuPressAction;
@@ -462,6 +466,13 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
             }
         } else {
             prefScreen.removePreference(powerCategory);
+        }
+
+	// Fingerprint unlock
+        mFingerprintManager = (FingerprintManager) getActivity().getSystemService(Context.FINGERPRINT_SERVICE);
+        mFpKeystore = (SwitchPreference) findPreference(FP_UNLOCK_KEYSTORE);
+        if (mFingerprintManager == null){
+            prefScreen.removePreference(mFpKeystore);
         }
 
         // Volume button
